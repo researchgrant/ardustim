@@ -35,6 +35,7 @@ proc=None
 # freqPatternEdit
 
 def startStim():
+    ui.startButton.setDisabled(True)
     global proc
     try:
         port=ui.portBox.currentText().split(":")[0]
@@ -43,15 +44,22 @@ def startStim():
         train_dur = ui.trainDurEdit.text()
         freq_list = ui.freqPatternEdit.text()
         pulse_ratio = ui.pulseWidthEdit.text()
-        print(freq_list,pulse_ratio,script_dir)
-        proc=subprocess.Popen(["python", os.path.join(script_dir,r"ardu_cli.py"), number_of_trains, inter_train_interval,train_dur,freq_list,pulse_ratio,port])
+        shape = ui.waveShapeBox.currentText()
+        # print(freq_list,pulse_ratio,script_dir)
+        proc=subprocess.Popen(["python", os.path.join(script_dir,r"ardu_cli.py"),
+                               number_of_trains,shape,
+                               inter_train_interval,train_dur,freq_list,pulse_ratio,port])
     finally:
         pass
+
+    QtTest.QTest.qWait(float(number_of_trains)*(float(inter_train_interval)+float(train_dur))*1000)
+    ui.startButton.setEnabled(True)
     
 ui.startButton.clicked.connect(lambda:startStim())
 
 def stopStim():
     global proc
+    ui.startButton.setEnabled(True)
     proc.terminate()
     
 ui.stopButton.clicked.connect(lambda:stopStim())
