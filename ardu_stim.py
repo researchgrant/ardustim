@@ -45,10 +45,11 @@ def startStim():
         freq_list = ui.freqPatternEdit.text()
         pulse_ratio = ui.pulseWidthEdit.text()
         shape = ui.waveShapeBox.currentText()
+        wait=ui.waitEdit.text()
         # print(freq_list,pulse_ratio,script_dir)
         proc=subprocess.Popen(["python", os.path.join(script_dir,r"ardu_cli.py"),
                                number_of_trains,shape,
-                               inter_train_interval,train_dur,freq_list,pulse_ratio,port])
+                               inter_train_interval,train_dur,freq_list,pulse_ratio,port,wait])
     finally:
         pass
 
