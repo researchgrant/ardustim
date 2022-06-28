@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>582</width>
+    <width>718</width>
     <height>159</height>
    </rect>
   </property>
@@ -15,14 +15,35 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="10" colspan="2">
+    <item row="0" column="11" colspan="2">
      <widget class="QLabel" name="label_9">
       <property name="text">
        <string>s</string>
       </property>
      </widget>
     </item>
-    <item row="2" column="10">
+    <item row="2" column="6" colspan="3">
+     <widget class="QComboBox" name="waveShapeBox">
+      <item>
+       <property name="text">
+        <string>Sine Wave</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Square Pulse</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="2" column="0" colspan="2">
+     <widget class="QLabel" name="label_4">
+      <property name="text">
+       <string>Train Pattern Repeats</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="11">
      <widget class="QLabel" name="label_6">
       <property name="text">
        <string>%</string>
@@ -36,28 +57,7 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="0" colspan="2">
-     <widget class="QLabel" name="label_4">
-      <property name="text">
-       <string>Train Pattern Repeats</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0" colspan="3">
-     <widget class="QLabel" name="label_3">
-      <property name="text">
-       <string>Train Frequency Pattern (Separated by ,)</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="10">
-     <widget class="QLabel" name="label_7">
-      <property name="text">
-       <string>Hz</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="2" colspan="9">
+    <item row="3" column="2" colspan="10">
      <widget class="QComboBox" name="portBox"/>
     </item>
     <item row="3" column="0">
@@ -74,38 +74,35 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="2">
-     <widget class="QSpinBox" name="patternRepeatsBox">
-      <property name="minimum">
-       <number>1</number>
-      </property>
-      <property name="maximum">
-       <number>999</number>
+    <item row="1" column="11">
+     <widget class="QLabel" name="label_7">
+      <property name="text">
+       <string>Hz</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="4">
+    <item row="0" column="5">
      <widget class="QLabel" name="label_8">
       <property name="text">
        <string>s</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="1" colspan="3">
+    <item row="0" column="1" colspan="4">
      <widget class="QLineEdit" name="trainDurEdit">
       <property name="text">
        <string>60</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="7">
-     <widget class="QLabel" name="label_2">
+    <item row="2" column="9">
+     <widget class="QLabel" name="label_5">
       <property name="text">
-       <string>Pre-Train Duration (s)</string>
+       <string>if pulse, width =</string>
       </property>
      </widget>
     </item>
-    <item row="2" column="9">
+    <item row="2" column="10">
      <widget class="QLineEdit" name="pulseWidthEdit">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -127,39 +124,63 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="4" colspan="6">
-     <widget class="QLineEdit" name="freqPatternEdit">
-      <property name="text">
-       <string>4,8</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="8" colspan="2">
+    <item row="0" column="9" colspan="2">
      <widget class="QLineEdit" name="pretrainDurEdit">
       <property name="text">
        <string>60</string>
       </property>
      </widget>
     </item>
-    <item row="2" column="8">
-     <widget class="QLabel" name="label_5">
+    <item row="0" column="8">
+     <widget class="QLabel" name="label_2">
       <property name="text">
-       <string>if pulse, width =</string>
+       <string>Pre-Train Duration (s)</string>
       </property>
      </widget>
     </item>
-    <item row="2" column="5" colspan="3">
-     <widget class="QComboBox" name="waveShapeBox">
-      <item>
-       <property name="text">
-        <string>Sine Wave</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Square Pulse</string>
-       </property>
-      </item>
+    <item row="2" column="4">
+     <widget class="QLineEdit" name="waitEdit">
+      <property name="text">
+       <string>0</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QSpinBox" name="patternRepeatsBox">
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>999</number>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="3">
+     <widget class="QLabel" name="label_10">
+      <property name="text">
+       <string>wait between:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="5">
+     <widget class="QLabel" name="label_11">
+      <property name="text">
+       <string>s</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="4" colspan="7">
+     <widget class="QLineEdit" name="freqPatternEdit">
+      <property name="text">
+       <string>4,8</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="4">
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>Train Frequency Pattern (Separated by ,)</string>
+      </property>
      </widget>
     </item>
    </layout>
@@ -169,7 +190,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>582</width>
+     <width>718</width>
      <height>22</height>
     </rect>
    </property>
