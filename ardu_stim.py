@@ -34,6 +34,18 @@ proc=None
 # patternRepeatsBox
 # freqPatternEdit
 
+def stopStim():
+    global proc
+    try:proc.kill()
+    except:pass
+    port=ui.portBox.currentText().split(":")[0]
+    proc=subprocess.Popen(["python", os.path.join(script_dir,r"ardu_cli.py"),
+                           str(1),'Sine Wave',str(0),str(0),str(0),str(0),str(port),str(0)])
+    ui.startButton.setEnabled(False)
+    QtTest.QTest.qWait(6000)
+    ui.startButton.setEnabled(True)
+
+
 def startStim():
     ui.startButton.setDisabled(True)
     global proc
@@ -53,17 +65,19 @@ def startStim():
     finally:
         pass
 
-    QtTest.QTest.qWait(float(number_of_trains)*(float(inter_train_interval)+float(train_dur))*1000)
-    ui.startButton.setEnabled(True)
+    QtTest.QTest.qWait(int(float(number_of_trains)*(float(inter_train_interval)+float(train_dur))*1000)+6000)
+    stopStim()
+
+    
+    
     
 ui.startButton.clicked.connect(lambda:startStim())
 
-def stopStim():
-    global proc
-    ui.startButton.setEnabled(True)
-    proc.terminate()
-    
-ui.stopButton.clicked.connect(lambda:stopStim())
+def user_stop():
+    print("ABORTING...")
+    stopStim()
+
+ui.stopButton.clicked.connect(lambda:user_stop())
 
 if __name__ == '__main__': 
     app.exec_()
