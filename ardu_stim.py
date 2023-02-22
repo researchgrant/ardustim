@@ -42,8 +42,11 @@ def stopStim():
     proc=subprocess.Popen(["python", os.path.join(script_dir,r"ardu_cli.py"),
                            str(1),'Sine Wave',str(0),str(0),str(0),str(0),str(port),str(0)])
     ui.startButton.setEnabled(False)
+    ui.stopButton.setEnabled(False)
     QtTest.QTest.qWait(6000)
     ui.startButton.setEnabled(True)
+    ui.stopButton.setEnabled(True)
+    
 
 
 def startStim():
