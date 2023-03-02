@@ -23,7 +23,7 @@ Dialog.show()
 
 script_dir=os.path.dirname(os.path.realpath(__file__))
 
-ports = {port.device:port.description for port in list_ports.comports()}
+ports = {port.device:port.description for port in list(list_ports.comports())[::-1]}
 ui.portBox.addItems([key+": "+value for key,value in reversed(ports.items())])
 
 
@@ -68,7 +68,7 @@ def startStim():
     finally:
         pass
 
-    QtTest.QTest.qWait(int(float(number_of_trains)*(float(inter_train_interval)+float(train_dur))*1000)+6000)
+    QtTest.QTest.qWait(int(float(number_of_trains)*(float(wait)+len(freq_list.split(","))*(float(inter_train_interval)+float(train_dur))))*1000+6000)
     stopStim()
 
     
