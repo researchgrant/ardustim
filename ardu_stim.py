@@ -7,13 +7,14 @@ Created on Tue Feb 15 12:04:02 2022
 
 from ardu_window import Ui_MainWindow
 import sys, os
-from PyQt5 import QtCore, QtWidgets, QtTest 
+from PyQt5 import QtCore, QtWidgets, QtTest
+from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtGui import QPixmap
 import pyfirmata
 import time
 from serial.tools import list_ports
 import subprocess
-
+import json
 
 app = QtWidgets.QApplication(sys.argv)
 Dialog = QtWidgets.QMainWindow()
@@ -71,8 +72,37 @@ def startStim():
     QtTest.QTest.qWait(int(float(number_of_trains)*(float(wait)+len(freq_list.split(","))*(float(inter_train_interval)+float(train_dur))))*1000+6000)
     stopStim()
 
-    
-    
+def load_settings():
+    settings_file = QFileDialog.getOpenFileName(caption='Open file', directory='c:\\',filter="Text files (*.txt)")[0]
+    with open(settings_file) as file:
+        settings = json.load(file)
+    if 1:# try:
+        ui.patternRepeatsBox.setValue(int(settings["Train Pattern Repeats"]))
+        ui.pretrainDurEdit.setText(str(settings["Pre-Train Duration"]))
+        ui.trainDurEdit.setText(str(settings["Train Duration"]))
+        ui.freqPatternEdit.setText(str(settings["Train Frequency Pattern"]))
+        ui.pulseWidthEdit.setText(str(settings["Square Pulse Width (%)"]))
+        ui.waveShapeBox.setCurrentText(str(settings["Wave"]))
+        ui.waitEdit.setText(str(settings["Wait Between Train Patterns"]))
+    # except:
+    #     print("Error: settings file incorrect format")
+ui.actionLoad_Settings.triggered.connect(lambda:load_settings())
+
+def save_settings():
+    save_file = QFileDialog.getSaveFileName(caption='Save file', directory='c:\\',filter="Text files (*.txt)")[0]
+    settings = {"Train Duration":str(ui.trainDurEdit.text()),
+                "Pre-Train Duration":str(ui.pretrainDurEdit.text()),
+                "Train Frequency Pattern":str(ui.freqPatternEdit.text()),
+                "Train Pattern Repeats":str(ui.patternRepeatsBox.text()),
+                "Wait Between Train Patterns":str(ui.waitEdit.text()),
+                "Wave": str(ui.waveShapeBox.currentText()),
+                "Square Pulse Width (%)":str(ui.pulseWidthEdit.text())}
+
+    with open(save_file, 'w') as file:
+         file.write(json.dumps(settings))
+         
+
+ui.actionSave_Settings.triggered.connect(lambda:save_settings())
     
 ui.startButton.clicked.connect(lambda:startStim())
 
@@ -84,3 +114,4 @@ ui.stopButton.clicked.connect(lambda:user_stop())
 
 if __name__ == '__main__': 
     app.exec_()
+    

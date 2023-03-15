@@ -92,12 +92,21 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.label_3, 1, 0, 1, 4)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 718, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 718, 18))
         self.menubar.setObjectName("menubar")
+        self.menuFile = QtWidgets.QMenu(self.menubar)
+        self.menuFile.setObjectName("menuFile")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+        self.actionLoad_Settings = QtWidgets.QAction(MainWindow)
+        self.actionLoad_Settings.setObjectName("actionLoad_Settings")
+        self.actionSave_Settings = QtWidgets.QAction(MainWindow)
+        self.actionSave_Settings.setObjectName("actionSave_Settings")
+        self.menuFile.addAction(self.actionLoad_Settings)
+        self.menuFile.addAction(self.actionSave_Settings)
+        self.menubar.addAction(self.menuFile.menuAction())
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -125,4 +134,17 @@ class Ui_MainWindow(object):
         self.label_11.setText(_translate("MainWindow", "s"))
         self.freqPatternEdit.setText(_translate("MainWindow", "4,8"))
         self.label_3.setText(_translate("MainWindow", "Train Frequency Pattern (Separated by ,)"))
+        self.menuFile.setTitle(_translate("MainWindow", "File"))
+        self.actionLoad_Settings.setText(_translate("MainWindow", "Load Settings..."))
+        self.actionSave_Settings.setText(_translate("MainWindow", "Save Settings..."))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
 
