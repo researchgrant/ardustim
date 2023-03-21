@@ -48,7 +48,7 @@ def run(train_list, inter_train_interval, port, wait, number_of_trains):
         
 if __name__ == '__main__': 
     args = sys.argv
-    time_resolution=1000
+    time_resolution=2000
     number_of_trains=int(args[1])
     shape=args[2]
     inter_train_interval=float(args[3])
